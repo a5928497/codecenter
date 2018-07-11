@@ -5,15 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-@NoArgsConstructor
+import javax.persistence.*;
+
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Accessors(chain = true)
-public class User {
-	private Integer id;
-	private String username;
-	private String password;
-	private String realName;
-	private String bank;
-	private Integer role_id;
+
+public class Role {
+
+    private Integer id;
+    private String roleName;
 }

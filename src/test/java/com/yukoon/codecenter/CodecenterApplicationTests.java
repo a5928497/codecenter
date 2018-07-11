@@ -16,7 +16,7 @@ public class CodecenterApplicationTests {
 	@Test
 	public void contextLoads() {
 		userMapper.addUser(new User().setUsername("feili").setPassword("123").setRealName("feili").setBank("head office"));
-
+		userMapper.addAdmin(new User().setUsername("feili").setPassword("123").setRealName("feili").setBank("head office"));
 	}
 
 }
