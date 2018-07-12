@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
+
 @Mapper
 public interface RecordMapper {
 
@@ -17,6 +19,9 @@ public interface RecordMapper {
 
 	@Select("SELECT * FROM records WHERE id = #{id}")
 	public Record findById(Integer id);
+
+	@Select("SELECT * FROM records WHERE user_id = #{user_id}")
+	public List<Record> findByUserid(Integer user_id);
 
 	@Update("UPDATE records SET flag = null")
 	public void clearFlag();

@@ -64,6 +64,7 @@ public class CodeController {
 		Reward reward = rewardService.findById(record.getReward_id());
 		map.put("page",page);
 		map.put("reward",reward);
+		map.put("reward_id",record.getReward_id());
 		return "backend/code_list";
 	}
 }

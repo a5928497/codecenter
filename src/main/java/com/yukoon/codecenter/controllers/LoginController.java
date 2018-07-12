@@ -1,6 +1,11 @@
 package com.yukoon.codecenter.controllers;
 
+import com.yukoon.codecenter.entities.Page;
+import com.yukoon.codecenter.entities.Record;
+import com.yukoon.codecenter.entities.Reward;
 import com.yukoon.codecenter.entities.User;
+import com.yukoon.codecenter.services.RecordService;
+import com.yukoon.codecenter.services.RewardService;
 import com.yukoon.codecenter.services.UserService;
 import com.yukoon.codecenter.utils.EncodeUtil;
 import org.apache.shiro.SecurityUtils;
@@ -11,11 +16,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
+	private final static Integer PAGE_SIZE =10;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RecordService recordService;
+	@Autowired
+	private RewardService rewardService;
 
 	@GetMapping("/login")
 	public String toLogin() {
@@ -23,7 +37,21 @@ public class LoginController {
 	}
 
 	@GetMapping("/dashboard")
-	public String toDashboard() {
+	public String toDashboard(@RequestParam(value = "pageNo",required = false,defaultValue = "1")Integer pageNo,
+							  Map<String,Object> map) {
+		if (pageNo <1) {
+			pageNo =1;
+		}
+		Subject currentUser = SecurityUtils.getSubject();
+		String username = (String) currentUser.getPrincipal();
+		if (null == username) {
+			return "redirect:/login";
+		}else {
+			User user = userService.findByUsername(username);
+			Page page = recordService.findByUserId(pageNo,PAGE_SIZE,user.getId());
+			map.put("page",page);
+			map.put("user",user);
+		}
 		return "backend/dashboard";
 	}
 

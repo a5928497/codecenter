@@ -1,9 +1,11 @@
 package com.yukoon.codecenter.services;
 
 import com.yukoon.codecenter.entities.Code;
+import com.yukoon.codecenter.entities.Page;
 import com.yukoon.codecenter.entities.Record;
 import com.yukoon.codecenter.mappers.RecordMapper;
 import com.yukoon.codecenter.utils.CodeUtil;
+import com.yukoon.codecenter.utils.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +49,11 @@ public class RecordService {
 	@Transactional
 	public Record findById(Integer id) {
 		return recordMapper.findById(id);
+	}
+
+	//分页查询某个用户下所有申领记录
+	@Transactional
+	public Page findByUserId(Integer pageNo,Integer pageSize,Integer user_id) {
+		return PageableUtil.page(pageNo,pageSize,recordMapper.findByUserid(user_id));
 	}
 }
