@@ -9,10 +9,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -24,6 +21,14 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+
+    @ModelAttribute
+    public void getUser(@RequestParam(value = "id",required = false)Integer id,Map<String,Object> map) {
+        //若为修改，则会带id
+        if (id!=null) {
+            map.put("user",userService.findByid(id));
+        }
+    }
 
     //后台查询所有用户
     @RequiresRoles("admin")
@@ -91,8 +96,31 @@ public class UserController {
     @RequiresPermissions("edit")
     @GetMapping("/user/{id}")
     public String toEdit(@PathVariable("id")Integer id, Map<String,Object> map, String errMsg) {
+        if (errMsg !=null) {
+            map.put("errMsg",errMsg);
+        }
         map.put("user",userService.findByid(id));
         map.put("roles",roleService.findAll());
         return "backend/user_input";
+    }
+
+    //后台编辑用户
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @PutMapping("/user")
+    public String Edit(User user, RedirectAttributes attributes) {
+        //检查用户名前后是否一致
+        if (user.getUsername().equals(userService.findByid(user.getId()).getUsername())) {
+            userService.updateUser(user);
+            return "redirect:/users";
+        }else {
+            if (userService.isUnique(user.getUsername())) {
+                userService.updateUser(user);
+                return "redirect:/users";
+            }else {
+                attributes.addFlashAttribute("errMsg","该登录账号有重复！");
+                return "redirect:/user/"+user.getId();
+            }
+        }
     }
 }

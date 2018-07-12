@@ -74,4 +74,10 @@ public class UserService {
 	public User findByid(Integer id) {
 		return userMapper.findById(id);
 	}
+
+	//更新客户资料
+	@Transactional
+	public void updateUser(User user)  {
+		userMapper.updateUser(user);
+	}
 }

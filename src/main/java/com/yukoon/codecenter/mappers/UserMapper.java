@@ -4,6 +4,7 @@ import com.yukoon.codecenter.entities.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -33,4 +34,7 @@ public interface UserMapper {
 
 	@Select("SELECT id,username,password,role_id FROM users WHERE username = #{username}")
 	public User login(String username);
+
+	@Update("UPDATE users SET username = #{username},realName =#{realName},bank =#{bank},role_id =#{role_id} WHERE id = #{id}")
+	public void updateUser(User user);
 }
