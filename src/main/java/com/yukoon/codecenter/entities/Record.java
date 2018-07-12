@@ -12,5 +12,7 @@ import lombok.experimental.Accessors;
 public class Record {
     private Integer id;
     private Integer user_id;
+    private Integer total;
+    private Integer reward_id;
     private Data apply_date;
 }

@@ -40,6 +40,6 @@ public class CodeUtil {
     }
 
     public static void main(String[] args) {
-
+        System.out.println(encodeCode(99999999999999L));
     }
 }

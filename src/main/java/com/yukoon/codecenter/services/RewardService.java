@@ -63,4 +63,10 @@ public class RewardService {
         reward_name = "%"+ reward_name + "%";
         return PageableUtil.page(pageNo,pageSize,rewardMapper.search(reward_name));
     }
+
+    //查找所有上架礼品
+    @Transactional
+    public List<Reward> findAllAlive() {
+        return rewardMapper.findAllAlive();
+    }
 }

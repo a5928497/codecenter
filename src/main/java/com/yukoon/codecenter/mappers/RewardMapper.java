@@ -17,6 +17,9 @@ public interface RewardMapper {
     @Select("SELECT * FROM rewards WHERE reward_name LIKE #{reward_name}")
     public List<Reward> search(String reward_name);
 
+    @Select("SELECT * FROM rewards WHERE status = 1")
+    public List<Reward> findAllAlive();
+
     @Insert("INSERT INTO rewards (reward_name,status) VALUES (#{reward_name},1)")
     public void addReward(Reward reward);
 
