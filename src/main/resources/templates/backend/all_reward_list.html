@@ -72,11 +72,11 @@
                                     <tr th:each="reward:${page.list}">
                                         <td th:text="${reward.id}">id</td>
                                         <td th:text="${reward.reward_name}">reward_name</td>
-                                        <td th:text="${reward.status}">status</td>
+                                        <td th:text="${reward.status}==1?上架:下架">status</td>
                                         <td>
                                             <a th:href="@{/reward/}+${reward.id}" ><button class="btn btn-sm btn-info">编辑</button></a>
-                                            <a th:href="@{/reward/}+${reward.id}" th:if="${reward.status} ==2"><button class="btn btn-sm btn-primary">上架</button></a>
-                                            <a th:href="@{/reward/}+${reward.id}" th:if="${reward.status} ==1"><button class="btn btn-sm btn-warning">下架</button></a>
+                                            <a th:href="@{/alive/}+${reward.id}" th:if="${reward.status} ==2"><button class="btn btn-sm btn-primary">上架</button></a>
+                                            <a th:href="@{/block/}+${reward.id}" th:if="${reward.status} ==1"><button class="btn btn-sm btn-warning">下架</button></a>
                                             <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
                                         </td>
                                     </tr>

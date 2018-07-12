@@ -73,4 +73,22 @@ public class RewardController {
         rewardService.update(reward);
         return "redirect:/rewards";
     }
+
+    //后台上架礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @GetMapping("/alive/{id}")
+    public String alive(@PathVariable("id")Integer id) {
+        rewardService.alive(id);
+        return "redirect:/rewards";
+    }
+
+    //后台下架礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @GetMapping("/block/{id}")
+    public String block(@PathVariable("id")Integer id) {
+        rewardService.block(id);
+        return "redirect:/rewards";
+    }
 }

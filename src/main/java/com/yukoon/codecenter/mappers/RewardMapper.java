@@ -26,6 +26,6 @@ public interface RewardMapper {
     @Update("UPDATE rewards SET status = 1 WHERE id =#{id}")
     public void alive(Integer id);
 
-    @Update("UPDATE rewards SET status = 0 WHERE id =#{id}")
+    @Update("UPDATE rewards SET status = 2 WHERE id =#{id}")
     public void block(Integer id);
 }
