@@ -10,6 +10,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -83,5 +84,15 @@ public class UserController {
             attributes.addFlashAttribute("errMsg","该登录账号已存在！");
             return "redirect:/toadduser";
         }
+    }
+
+    //后台前往编辑用户
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @GetMapping("/user/{id}")
+    public String toEdit(@PathVariable("id")Integer id, Map<String,Object> map, String errMsg) {
+        map.put("user",userService.findByid(id));
+        map.put("roles",roleService.findAll());
+        return "backend/user_input";
     }
 }

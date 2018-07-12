@@ -76,7 +76,7 @@
                                         <td th:text="${user.bank}">bank</td>
                                         <td th:text="${user.role_id} == 1?管理员:经办员">role</td>
                                         <td>
-                                            <a th:href="@{/reward/}" ><button class="btn btn-sm btn-warning">编辑</button></a>
+                                            <a th:href="@{/user/}+${user.id}" ><button class="btn btn-sm btn-warning">编辑</button></a>
                                             <a th:href="@{/code/}" ><button class="btn btn-sm btn-success">重置密码</button></a>
                                             <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
                                         </td>

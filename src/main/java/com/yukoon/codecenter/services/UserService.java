@@ -68,4 +68,10 @@ public class UserService {
 		realName = "%" + realName + "%";
 		return PageableUtil.page(pageNo,pageSize,userMapper.searchByRealName(realName));
 	}
+
+	//根据Id查找客户
+	@Transactional
+	public User findByid(Integer id) {
+		return userMapper.findById(id);
+	}
 }
