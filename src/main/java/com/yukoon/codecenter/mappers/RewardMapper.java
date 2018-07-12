@@ -1,10 +1,7 @@
 package com.yukoon.codecenter.mappers;
 
 import com.yukoon.codecenter.entities.Reward;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,6 +14,9 @@ public interface RewardMapper {
     @Select("SELECT * FROM rewards WHERE id = #{id}")
     public Reward findById(Integer id);
 
+    @Select("SELECT * FROM rewards WHERE reward_name LIKE #{reward_name}")
+    public List<Reward> search(String reward_name);
+
     @Insert("INSERT INTO rewards (reward_name,status) VALUES (#{reward_name},1)")
     public void addReward(Reward reward);
 
@@ -28,4 +28,7 @@ public interface RewardMapper {
 
     @Update("UPDATE rewards SET status = 2 WHERE id =#{id}")
     public void block(Integer id);
+
+    @Delete("DELETE FROM rewards WHERE id = #{id}")
+    public void delReward(Integer id);
 }

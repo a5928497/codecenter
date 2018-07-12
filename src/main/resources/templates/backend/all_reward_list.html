@@ -77,7 +77,7 @@
                                             <a th:href="@{/reward/}+${reward.id}" ><button class="btn btn-sm btn-info">编辑</button></a>
                                             <a th:href="@{/alive/}+${reward.id}" th:if="${reward.status} ==2"><button class="btn btn-sm btn-primary">上架</button></a>
                                             <a th:href="@{/block/}+${reward.id}" th:if="${reward.status} ==1"><button class="btn btn-sm btn-warning">下架</button></a>
-                                            <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
+                                            <button  th:attr="del_uri = @{/reward/}+${reward.id}" class="btn btn-sm btn-danger deleteBTN">删除</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -107,13 +107,22 @@
         </div>
         </div>
         </div>
+    <form id="delForm" method="post">
+        <input type="hidden" th:name="_method" th:value="delete"/>
+    </form>
     <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
     <script>
         $search_group = $("#search_group");
         $border = $(".border");
+        $delBTN = $(".deleteBTN");
+        $delForm = $("#delForm");
         $search_group.css("width",300);
         $border.css("height",10);
+        $delBTN.click(function () {
+            $delForm.attr("action",$(this).attr("del_uri")).submit();
+            return false;
+        });
     </script>
 
 </body>

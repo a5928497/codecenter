@@ -50,4 +50,17 @@ public class RewardService {
     public void update(Reward reward) {
         rewardMapper.updateReward(reward);
     }
+
+    //删除礼品
+    @Transactional
+    public void delete(Integer id) {
+        rewardMapper.delReward(id);
+    }
+
+    //搜索礼品
+    @Transactional
+    public Page search(Integer pageNo,Integer pageSize,String reward_name) {
+        reward_name = "%"+ reward_name + "%";
+        return PageableUtil.page(pageNo,pageSize,rewardMapper.search(reward_name));
+    }
 }

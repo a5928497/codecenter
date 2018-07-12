@@ -39,6 +39,20 @@ public class RewardController {
         return "backend/all_reward_list";
     }
 
+    //后台按礼品名搜索礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("query")
+    @PostMapping("/searchreward")
+    public String search(@RequestParam(value = "pageNo",required = false,defaultValue = "1")Integer pageNo,
+                          Map<String,Object> map,String reward_name) {
+        if (pageNo<1) {
+            pageNo = 1;
+        }
+        Page page = rewardService.search(pageNo,PAGE_SIZE,reward_name);
+        map.put("page",page);
+        return "backend/all_reward_list";
+    }
+
     //后台前往添加礼品
     @RequiresRoles("admin")
     @RequiresPermissions("add")
@@ -89,6 +103,15 @@ public class RewardController {
     @GetMapping("/block/{id}")
     public String block(@PathVariable("id")Integer id) {
         rewardService.block(id);
+        return "redirect:/rewards";
+    }
+
+    //后台删除礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("delete")
+    @DeleteMapping("/reward/{id}")
+    public String del(@PathVariable("id")Integer id) {
+        rewardService.delete(id);
         return "redirect:/rewards";
     }
 }
