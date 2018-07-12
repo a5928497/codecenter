@@ -1,5 +1,6 @@
 package com.yukoon.codecenter.realms;
 
+import com.yukoon.codecenter.entities.Role;
 import com.yukoon.codecenter.entities.User;
 import com.yukoon.codecenter.services.PermService;
 import com.yukoon.codecenter.services.RoleService;
@@ -32,7 +33,6 @@ public class UserRealm extends AuthorizingRealm {
 		UsernamePasswordToken upToken = (UsernamePasswordToken) authenticationToken;
 		//2. 从 UsernamePasswordToken 中获取 username,password构建user
 		String username = upToken.getUsername();
-		System.out.println(upToken.getPassword());
 		User user = new User().setUsername(username).setPassword(String.valueOf(upToken.getPassword()));
 		//3. 从数据库获取User准备进行比对
 		User user_temp = userService.login(user);
@@ -60,7 +60,9 @@ public class UserRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		Set<String> roles = new HashSet<>();
 		Integer role_id  = user_temp.getRole_id();
-		roles.add(roleService.findById(role_id).getRoleName());
+		for (Role role : roleService.findById(role_id)) {
+			roles.add(role.getRole_name());
+		}
 		info.addRoles(roles);
 		for (String perm: permService.findByRoleId(role_id)) {
 			info.addStringPermission(perm);

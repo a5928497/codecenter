@@ -15,5 +15,5 @@ import javax.persistence.*;
 public class Role {
 
     private Integer id;
-    private String roleName;
+    private String role_name;
 }

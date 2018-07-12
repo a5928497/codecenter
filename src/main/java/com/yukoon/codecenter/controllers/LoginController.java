@@ -22,6 +22,11 @@ public class LoginController {
 		return "backend/login";
 	}
 
+	@GetMapping("/dashboard")
+	public String toDashboard() {
+		return "backend/dashboard";
+	}
+
 	@PostMapping("/login")
 	public String login(User user) {
 		//获得subject
@@ -40,8 +45,9 @@ public class LoginController {
 				return "redirect:/login";
 			}
 			System.out.println("登陆成功！");
+			return "redirect:/dashboard";
+		}else {
 			return "redirect:/login";
 		}
-		return "redirect:/login";
 	}
 }
