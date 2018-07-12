@@ -1,10 +1,7 @@
 package com.yukoon.codecenter.mappers;
 
 import com.yukoon.codecenter.entities.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -40,4 +37,7 @@ public interface UserMapper {
 
 	@Update("UPDATE users SET password = #{password} WHERE id = #{id}")
 	public void resetPsw(User user);
+
+	@Delete("DELETE FROM users WHERE id = #{id}")
+	public void delUser(Integer id);
 }

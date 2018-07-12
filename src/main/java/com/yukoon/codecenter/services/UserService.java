@@ -86,4 +86,10 @@ public class UserService {
 	public void resetPsw(User user)  {
 		userMapper.resetPsw(user);
 	}
+
+	//删除用户
+	@Transactional
+	public void delete(Integer id) {
+		userMapper.delUser(id);
+	}
 }

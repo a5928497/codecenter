@@ -35,9 +35,12 @@ public class UserController {
     @RequiresPermissions("query")
     @GetMapping("/users")
     public String findAll(@RequestParam(value = "pageNo",required = false,defaultValue = "1")Integer pageNo,
-                          Map<String,Object> map) {
+                          Map<String,Object> map,String errMsg) {
         if (pageNo<1) {
             pageNo = 1;
+        }
+        if (errMsg != null) {
+            map.put("errMsg",errMsg);
         }
         Page page = userService.findAll(pageNo,PAGE_SIZE);
         map.put("page",page);
@@ -133,6 +136,20 @@ public class UserController {
         psw = EncodeUtil.encodePassword(psw,user.getUsername());
         user.setPassword(psw);
         userService.resetPsw(user);
+        return "redirect:/users";
+    }
+
+    //后台删除用户
+    @RequiresRoles("admin")
+    @RequiresPermissions("delete")
+    @DeleteMapping("/user/{id}")
+    public String del(@PathVariable("id")Integer id,RedirectAttributes attributes) {
+        try {
+            userService.delete(id);
+        }catch (Exception e) {
+            attributes.addFlashAttribute("errMsg","不能删除用户，请先处理好用户关联数据再执行删除！");
+            return "redirect:/users";
+        }
         return "redirect:/users";
     }
 }

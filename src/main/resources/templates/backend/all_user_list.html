@@ -78,7 +78,7 @@
                                         <td>
                                             <a th:href="@{/user/}+${user.id}" ><button class="btn btn-sm btn-warning">编辑</button></a>
                                             <button th:attr="put_uri=@{/reset/}+${user.id}" class="btn btn-sm btn-success resetBTN">重置密码</button>
-                                            <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
+                                            <button  th:attr="del_uri = @{/user/}+${user.id}" class="btn btn-sm btn-danger deleteBTN">删除</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -112,6 +112,10 @@
         <input type="hidden" name="psw" id="psw">
         <input type="hidden" th:name="_method" th:value="put"/>
     </form>
+    <form id="delForm" method="post">
+        <input type="hidden" th:name="_method" th:value="delete"/>
+    </form>
+    <input type="hidden" id="errMsg" th:value="${errMsg}" th:if="${errMsg!=null}">
     <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/all_user_list.js}"></script>
