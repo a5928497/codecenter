@@ -11,4 +11,7 @@ public interface RoleMapper {
 
 	@Select("SELECT id,role_name FROM roles WHERE id = #{id}")
 	public List<Role> findById(Integer id);
+
+	@Select("SELECT id,role_name FROM roles")
+	public List<Role> findAll();
 }

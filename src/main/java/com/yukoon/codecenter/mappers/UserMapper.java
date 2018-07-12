@@ -22,7 +22,7 @@ public interface UserMapper {
 	@Select("SELECT id,username,realName,bank,role_id FROM users WHERE realName LIKE #{realName}")
 	public List<User> searchByRealName(String realName);
 
-	@Select("SELECT username FROM users WHERE ussername = #{username}")
+	@Select("SELECT username FROM users WHERE username = #{username}")
 	public List<String> isUnique(String username);
 
 	@Select("SELECT id,username,password,realName,bank,role_id FROM users WHERE username = #{username}")

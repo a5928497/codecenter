@@ -18,4 +18,9 @@ public class RoleService {
 	public List<Role> findById(Integer id) {
 		return roleMapper.findById(id);
 	}
+
+	@Transactional
+	public List<Role> findAll() {
+		return roleMapper.findAll();
+	}
 }

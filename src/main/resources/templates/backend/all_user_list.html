@@ -45,8 +45,9 @@
                 </div>
             </form>
                 <div class="border"></div>
-                <a th:href="@{/allusers}"><button class="btn btn-sm btn-info">全部</button></a>
-                <a th:href="@{/acts}"><button class="btn btn-sm btn-info">返回首页</button></a>
+                <a th:href="@{/users}"><button class="btn btn-sm btn-info">全部</button></a>
+                <a th:href="@{/dashboard}"><button class="btn btn-sm btn-info">返回首页</button></a>
+                <a th:href="@{/toadduser}"><button class="btn btn-sm btn-info">添加用户</button></a>
                 <div class="border"></div>
             </div>
             <div class="row">
@@ -65,6 +66,7 @@
                                     <th data-hide="all">姓名</th>
                                     <th data-hide="all">所属支行</th>
                                     <th data-hide="all">角色</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -73,6 +75,11 @@
                                         <td th:text="${user.realName}">realName</td>
                                         <td th:text="${user.bank}">bank</td>
                                         <td th:text="${user.role_id} == 1?管理员:经办员">role</td>
+                                        <td>
+                                            <a th:href="@{/reward/}" ><button class="btn btn-sm btn-warning">编辑</button></a>
+                                            <a th:href="@{/code/}" ><button class="btn btn-sm btn-success">重置密码</button></a>
+                                            <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
