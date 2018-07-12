@@ -22,8 +22,9 @@ public class CodeController {
 	@GetMapping("/code")
 	public String toGetCodes(Map<String,Object> map) {
 		Subject currentUser  = SecurityUtils.getSubject();
-		String user = currentUser.getPrincipal().toString();
-		if (user != null) {
+		String username = currentUser.getPrincipal().toString();
+		if (username != null) {
+			map.put("user_id",userService.findIdByUsername(username));
 			map.put("rewards",rewardService.findAllAlive());
 			return "backend/get_codes_input";
 		}else {

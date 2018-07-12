@@ -92,4 +92,10 @@ public class UserService {
 	public void delete(Integer id) {
 		userMapper.delUser(id);
 	}
+
+	//获得用户id
+	@Transactional
+	public Integer findIdByUsername(String username) {
+		return userMapper.findIdByUsername(username);
+	}
 }

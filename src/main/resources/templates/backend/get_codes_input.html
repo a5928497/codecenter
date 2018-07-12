@@ -53,6 +53,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <input type="hidden" name="user_id" th:value="${user_id}">
                                 <div class="form-group">
                                     <div class="col-sm-4 col-sm-offset-2">
                                         <button th:attr="back_uri = @{/dashboard}"  class="btn btn-white backBTN" >取消</button>
@@ -71,11 +72,6 @@
     <!-- Mainly scripts -->
     <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
-    <!-- Jasny -->
-    <script type="text/javascript" th:src="@{/webjars/jasny-bootstrap/3.1.2/dist/js/jasny-bootstrap.min.js}"></script>
-    <!-- CodeMirror -->
-    <script th:src="@{/webjars/codemirror/5.33.0/src/codemirror.js}"></script>
-    <script th:src="@{/webjars/codemirror/5.33.0/mode/xml/xml.js}"></script>
 <script>
     $backBTN = $(".backBTN");
     $backBTN.click(function () {
