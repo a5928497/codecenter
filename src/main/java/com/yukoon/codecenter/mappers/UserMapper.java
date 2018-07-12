@@ -16,6 +16,9 @@ public interface UserMapper {
 	@Insert("INSERT INTO users(username,password,realName,bank,role_id) VALUES (#{username},#{password},#{realName},#{bank},1)")
 	public void addAdmin(User user);
 
+	@Select("SELECT id,username,realName,bank,role_id FROM users")
+	public List<User> findAll();
+
 	@Select("SELECT username FROM users WHERE ussername = #{username}")
 	public List<String> isUnique(String username);
 

@@ -1,10 +1,14 @@
 package com.yukoon.codecenter.services;
 
+import com.yukoon.codecenter.entities.Page;
 import com.yukoon.codecenter.entities.User;
 import com.yukoon.codecenter.mappers.UserMapper;
+import com.yukoon.codecenter.utils.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -50,5 +54,11 @@ public class UserService {
 	public User findByUsername(String username) {
 		User userFromDB = userMapper.findByUsername(username);
 		return userFromDB;
+	}
+
+	//分页查找所有用户信息
+	@Transactional
+	public Page findAll(Integer pageNo, Integer pageSize) {
+		return PageableUtil.page(pageNo,pageSize,userMapper.findAll());
 	}
 }

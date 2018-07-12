@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users</title>
+
+    <link th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" rel="stylesheet">
+    <link th:href="@{/webjars/footable/2.0.3/css/footable.core.min.css}" rel="stylesheet">
+    <link th:href="@{/css/commons/logout.css}" rel="stylesheet">
+    <link th:href="@{/css/commons/animate.min.css}" rel="stylesheet">
+    <link th:href="@{/css/commons/style.min.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <a th:replace="commons/logout::logout_btn"></a>
+                    <h2>管理后台</h2>
+                </div>
+            </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div>
+            <form action="/searchuser" method="post" >
+                <div class="input-group"id="search_group">
+                    <input type="text" class="form-control input-sm" name="username" placeholder="手机号">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </form>
+                <div class="border"></div>
+                <a th:href="@{/allusers}"><button class="btn btn-sm btn-info">全部</button></a>
+                <a th:href="@{/acts}"><button class="btn btn-sm btn-info">返回首页</button></a>
+                <div class="border"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>用户管理</h5>
+
+                        </div>
+                        <div class="ibox-content">
+
+                            <table class="footable table table-stripped toggle-arrow-tiny">
+                                <thead>
+                                <tr>
+                                    <th data-hide="all">账号</th>
+                                    <th data-hide="all">姓名</th>
+                                    <th data-hide="all">所属支行</th>
+                                    <th data-hide="all">角色</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="user:${page.list}">
+                                        <td th:text="${user.username}">username</td>
+                                        <td th:text="${user.realName}">realName</td>
+                                        <td th:text="${user.bank}">bank</td>
+                                        <td th:text="${user.role_id} == 1?管理员:经办员">role</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5">
+                                        <ul class="pagination pull-right"></ul>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <p>
+                                <span th:text="查找到+${page.recordTotal}+条记录，+共有+${page.pageTotal}+页 "></span>
+                                <span th:text="当前为第+${page.pageNo}+页"></span>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1">上一页</a>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo -2}" th:text="${page.pageNo -2}" th:if="${page.pageNo -2 } ge 1"></a>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo -1}" th:text="${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1"></a>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo +1}" th:text="${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}"></a>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo +2}" th:text="${page.pageNo +2}" th:if="${page.pageNo +2 } le ${page.pageTotal}"></a>
+                                <a th:href="@{/allusers?pageNo=}+${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}">下一页</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+        </div>
+    <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
+    <script>
+        $search_group = $("#search_group");
+        $border = $(".border");
+        $search_group.css("width",300);
+        $border.css("height",10);
+    </script>
+
+</body>
+
+</html>
