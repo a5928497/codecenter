@@ -15,6 +15,9 @@ public interface RecordMapper {
 	@Select("SELECT * FROM records WHERE flag = #{flag}")
 	public Record findByFlag(int flag);
 
+	@Select("SELECT * FROM records WHERE id = #{id}")
+	public Record findById(Integer id);
+
 	@Update("UPDATE records SET flag = null")
 	public void clearFlag();
 }

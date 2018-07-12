@@ -18,6 +18,7 @@ public class RecordService {
 	@Autowired
 	private CodeService codeService;
 
+	//添加记录并获取新添加记录的id
 	@Transactional
 	public Record insertAndGetRecord(Record record) {
 		Date date = new Date();
@@ -30,13 +31,21 @@ public class RecordService {
 		return result;
 	}
 
+	//添加记录、兑换码，并获取新加记录id
 	@Transactional
-	public void getCodes(Record record) {
+	public Integer getCodes(Record record) {
 		Record new_record = insertAndGetRecord(record);
 		List<Code> codes = codeService.batchInsert(new_record);
 		for (Code code:codes) {
 			code.setCode(CodeUtil.encodeCode(code.getId()));
 			codeService.updateCodeAndClearFlag(code);
 		}
+		return new_record.getId();
+	}
+
+	//查询单个record
+	@Transactional
+	public Record findById(Integer id) {
+		return recordMapper.findById(id);
 	}
 }

@@ -17,6 +17,10 @@ public interface CodeMapper {
     @Select("SELECT * FROM codes WHERE flag = #{flag}")
     public List<Code> findByFlag(int flag);
 
+    //通过record_id查找code
+    @Select("SELECT code,status,reward_id,record_id,expiration_date FROM codes WHERE record_id = #{record_id}")
+    public List<Code> findAllByRecordId(Integer record_id);
+
     //根据id更新code并清除flag
     @Update("UPDATE codes SET flag =null,code = #{code} WHERE id = #{id}")
     public void updateCodeAndClearFlag(Code code);
