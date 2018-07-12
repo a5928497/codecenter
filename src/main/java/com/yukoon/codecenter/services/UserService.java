@@ -80,4 +80,10 @@ public class UserService {
 	public void updateUser(User user)  {
 		userMapper.updateUser(user);
 	}
+
+	//重置用户密码
+	@Transactional
+	public void resetPsw(User user)  {
+		userMapper.resetPsw(user);
+	}
 }

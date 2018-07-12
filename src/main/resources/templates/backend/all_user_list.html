@@ -77,7 +77,7 @@
                                         <td th:text="${user.role_id} == 1?管理员:经办员">role</td>
                                         <td>
                                             <a th:href="@{/user/}+${user.id}" ><button class="btn btn-sm btn-warning">编辑</button></a>
-                                            <a th:href="@{/code/}" ><button class="btn btn-sm btn-success">重置密码</button></a>
+                                            <button th:attr="put_uri=@{/reset/}+${user.id}" class="btn btn-sm btn-success resetBTN">重置密码</button>
                                             <button  th:attr="del_uri = @{/reward/}" class="btn btn-sm btn-danger deleteBTN">删除</button>
                                         </td>
                                     </tr>
@@ -108,14 +108,13 @@
         </div>
         </div>
         </div>
+    <form id="resetForm" method="post">
+        <input type="hidden" name="psw" id="psw">
+        <input type="hidden" th:name="_method" th:value="put"/>
+    </form>
     <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}"></script>
-    <script>
-        $search_group = $("#search_group");
-        $border = $(".border");
-        $search_group.css("width",300);
-        $border.css("height",10);
-    </script>
+    <script type="text/javascript" th:src="@{/js/all_user_list.js}"></script>
 
 </body>
 

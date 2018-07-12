@@ -123,4 +123,16 @@ public class UserController {
             }
         }
     }
+
+    //后台重置用户密码
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @PutMapping("/reset/{id}")
+    public String reset(@PathVariable("id")Integer id, String psw) {
+        User user = userService.findByid(id);
+        psw = EncodeUtil.encodePassword(psw,user.getUsername());
+        user.setPassword(psw);
+        userService.resetPsw(user);
+        return "redirect:/users";
+    }
 }

@@ -14,6 +14,6 @@ public class EncodeUtil {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(encodePassword("123","feili2"));
+		System.out.println(encodePassword("1234","feili1"));
 	}
 }

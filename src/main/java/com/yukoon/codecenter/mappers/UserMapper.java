@@ -37,4 +37,7 @@ public interface UserMapper {
 
 	@Update("UPDATE users SET username = #{username},realName =#{realName},bank =#{bank},role_id =#{role_id} WHERE id = #{id}")
 	public void updateUser(User user);
+
+	@Update("UPDATE users SET password = #{password} WHERE id = #{id}")
+	public void resetPsw(User user);
 }
