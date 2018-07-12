@@ -61,4 +61,11 @@ public class UserService {
 	public Page findAll(Integer pageNo, Integer pageSize) {
 		return PageableUtil.page(pageNo,pageSize,userMapper.findAll());
 	}
+
+	//分页按姓名搜索用户信息
+	@Transactional
+	public Page seearchByRealName(Integer pageNo, Integer pageSize,String realName) {
+		realName = "%" + realName + "%";
+		return PageableUtil.page(pageNo,pageSize,userMapper.searchByRealName(realName));
+	}
 }

@@ -19,6 +19,9 @@ public interface UserMapper {
 	@Select("SELECT id,username,realName,bank,role_id FROM users")
 	public List<User> findAll();
 
+	@Select("SELECT id,username,realName,bank,role_id FROM users WHERE realName LIKE #{realName}")
+	public List<User> searchByRealName(String realName);
+
 	@Select("SELECT username FROM users WHERE ussername = #{username}")
 	public List<String> isUnique(String username);
 
