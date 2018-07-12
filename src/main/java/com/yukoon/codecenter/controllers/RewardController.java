@@ -7,9 +7,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -18,6 +16,14 @@ public class RewardController {
     private final static Integer PAGE_SIZE = 10;
     @Autowired
     private RewardService rewardService;
+
+    @ModelAttribute
+    public void getReward(@RequestParam(value = "id",required = false)Integer id,Map<String,Object> map) {
+        //若为修改，则id不为空
+        if (id != null) {
+            map.put("reward",rewardService.findById(id));
+        }
+    }
 
     //后台查询所有礼品
     @RequiresRoles("admin")
@@ -47,6 +53,24 @@ public class RewardController {
     @PostMapping("/reward")
     public String Add(Reward reward) {
         rewardService.addReward(reward);
+        return "redirect:/rewards";
+    }
+
+    //后台前往编辑礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @GetMapping("/reward/{id}")
+    public String toEdit(@PathVariable("id")Integer id,Map<String,Object>map) {
+        map.put("reward",rewardService.findById(id));
+        return "backend/reward_input";
+    }
+
+    //后台编辑礼品
+    @RequiresRoles("admin")
+    @RequiresPermissions("edit")
+    @PutMapping("/reward")
+    public String edit(Reward reward) {
+        rewardService.update(reward);
         return "redirect:/rewards";
     }
 }

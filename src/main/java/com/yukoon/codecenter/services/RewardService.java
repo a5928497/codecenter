@@ -21,6 +21,12 @@ public class RewardService {
         return PageableUtil.page(pageNo,pageSize,rewardMapper.findAll());
     }
 
+    //根据id查询单个礼品
+    @Transactional
+    public Reward findById(Integer id) {
+        return rewardMapper.findById(id);
+    }
+
     //添加礼品
     @Transactional
     public void addReward(Reward reward) {
@@ -37,5 +43,11 @@ public class RewardService {
     @Transactional
     public void block(Integer id) {
         rewardMapper.block(id);
+    }
+
+    //更新礼品信息
+    @Transactional
+    public void update(Reward reward) {
+        rewardMapper.updateReward(reward);
     }
 }

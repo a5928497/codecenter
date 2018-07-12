@@ -14,8 +14,14 @@ public interface RewardMapper {
     @Select("SELECT * FROM rewards ")
     public List<Reward> findAll();
 
+    @Select("SELECT * FROM rewards WHERE id = #{id}")
+    public Reward findById(Integer id);
+
     @Insert("INSERT INTO rewards (reward_name,status) VALUES (#{reward_name},1)")
     public void addReward(Reward reward);
+
+    @Update("UPDATE rewards SET reward_name = #{reward_name} WHERE id =#{id}")
+    public void updateReward(Reward reward);
 
     @Update("UPDATE rewards SET status = 1 WHERE id =#{id}")
     public void alive(Integer id);
