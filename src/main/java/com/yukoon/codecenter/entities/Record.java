@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -14,5 +16,6 @@ public class Record {
     private Integer user_id;
     private Integer total;
     private Integer reward_id;
-    private Data apply_date;
+    private Date apply_date;
+    private int flag;
 }

@@ -1,7 +1,9 @@
 package com.yukoon.codecenter;
 
+import com.yukoon.codecenter.entities.Record;
 import com.yukoon.codecenter.entities.User;
 import com.yukoon.codecenter.mappers.UserMapper;
+import com.yukoon.codecenter.services.CodeService;
 import com.yukoon.codecenter.services.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +18,13 @@ public class CodecenterApplicationTests {
 	private UserMapper userMapper;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private CodeService codeService;
 	@Test
 	public void contextLoads() {
-		System.out.println(roleService.findById(1));
+		Record record = new Record();
+		record.setTotal(10).setReward_id(1);
+		codeService.batchInsert(record);
 	}
 
 }

@@ -10,9 +10,9 @@ public class CodeMapperProvider {
     public String insertAll(Map map) {
         List<Code> codes = (List<Code>) map.get("list");
         StringBuffer sb = new StringBuffer();
-        sb.append("INSERT INTO codes (code,status,reward_id,record_id,expiration_date) VALUES");
-        MessageFormat mf = new MessageFormat("#'{'list[{0}].code'}',#'{'list[{0}].status'}',#'{'list[{0}].reward_id'}'," +
-                "#'{'list[{0}].record_id'}',#'{'list[{0}].expiration_date'}'");
+        sb.append("INSERT INTO codes (status,reward_id,expiration_date) VALUES");
+        MessageFormat mf = new MessageFormat("#'{'list[{0}].status'}',#'{'list[{0}].reward_id'}'," +
+                "#'{'list[{0}].expiration_date'}'");
         for (int i = 0;i< codes.size();i++) {
             sb.append("(");
             //这里如果直接用数字，超过1000会格式化变成1,000，但是String类型就没问题
