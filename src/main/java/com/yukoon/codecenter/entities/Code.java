@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 public class Code {
-    private Integer id;
+    private Long id;
     private String code;
     private Integer status;
     private Integer reward_id;

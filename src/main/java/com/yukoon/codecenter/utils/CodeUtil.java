@@ -4,38 +4,42 @@ import com.yukoon.codecenter.entities.Code;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CodeUtil {
-    //0-61
-    private static final String[] chars = {"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e",
-            "f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B",
-            "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
 
-    public static List<Code> getKey(int quantity,String lastCode) {
-        Integer startPosition = getStartPosition(lastCode);
-        List<Code> list = new ArrayList<>();
-        StringBuffer str = new StringBuffer();
-        return list;
-    }
+    private final static String salt = "acPAgHpeEIfFCb8C";
 
-    public static Integer getStartPosition(String str) {
-        String s = String.valueOf(str.charAt(str.length()-1));
-        Integer result = null;
-        for (int i = 0;i<62;i++) {
-            if (s.equals(chars[i])) {
-                result = i+1;
-                if (result > 61) {
-                    result = 0;
-                }
-                return result;
-            }
+    public static String encodeCode(long startpos) {
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        List<Integer> list =new ArrayList<>();
+        String start = String.valueOf(startpos);
+        char[] temp = salt.toCharArray();
+        int size = start.length();
+        for (int i = 0;i<size;i++) {
+            list.add(Integer.valueOf(start.substring(i,i+1)));
         }
-        return result;
+        int fill_size = 14-size;
+        for (int i = 0;i<fill_size ;i++) {
+            list.add(random.nextInt(10));
+        }
+        if (size<10) {
+            list.add(0);
+            list.add(size);
+        }else {
+            list.add(1);
+            list.add(size-10);
+        }
+        for (int i = 0;i<16 ;i++) {
+            temp[i] = (char)(temp[i]+list.get(i));
+        }
+        return String.valueOf(temp);
     }
+
     public static void main(String[] args) {
-        String start = "000400000000000Y";
-        System.out.println(getStartPosition(start));
+
     }
 }
