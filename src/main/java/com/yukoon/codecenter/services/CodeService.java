@@ -17,13 +17,24 @@ public class CodeService {
 	private CodeMapper codeMapper;
 
 	@Transactional
-	public void batchInsert(Record record) {
+	public List<Code> batchInsert(Record record) {
 		List<Code> list = new ArrayList<>();
+		List<Code> result = new ArrayList<>();
+		int flag = record.hashCode();
+		System.out.println(flag);
 		for (int i = 0;i<record.getTotal() ;i++) {
 			Code code = new Code();
-			code.setReward_id(record.getReward_id()).setStatus(1).setExpiration_date(new Date());
+			code.setReward_id(record.getReward_id()).setStatus(1).setExpiration_date(new Date())
+					.setRecord_id(record.getId()).setFlag(flag);
 			list.add(code);
 		}
 		codeMapper.insertAll(list);
+		result = codeMapper.findByFlag(flag);
+		return result;
+	}
+
+	@Transactional
+	public void updateCodeAndClearFlag(Code code) {
+		codeMapper.updateCodeAndClearFlag(code);
 	}
 }

@@ -24,7 +24,7 @@ public class CodecenterApplicationTests {
 	public void contextLoads() {
 		Record record = new Record();
 		record.setTotal(10).setReward_id(1);
-		codeService.batchInsert(record);
+		System.out.println(codeService.batchInsert(record));
 	}
 
 }

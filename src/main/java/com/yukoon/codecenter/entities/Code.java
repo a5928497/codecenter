@@ -18,4 +18,5 @@ public class Code {
     private Integer reward_id;
     private Integer record_id;
     private Date expiration_date;
+    private int flag;
 }

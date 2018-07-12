@@ -40,7 +40,7 @@ public class CodeController {
 	//后台申领兑换券
 	@PostMapping("/code")
 	public String getCodes(Record record) {
-		System.out.println(recordService.insertAndGetRecord(record));
+		recordService.getCodes(record);
 		return null;
 	}
 }
