@@ -59,9 +59,9 @@ public class RewardService {
 
     //搜索礼品
     @Transactional
-    public Page search(Integer pageNo,Integer pageSize,String reward_name) {
+    public List<Reward> search(String reward_name) {
         reward_name = "%"+ reward_name + "%";
-        return PageableUtil.page(pageNo,pageSize,rewardMapper.search(reward_name));
+        return rewardMapper.search(reward_name);
     }
 
     //查找所有上架礼品

@@ -48,8 +48,12 @@ public class RewardController {
         if (pageNo<1) {
             pageNo = 1;
         }
-        Page page = rewardService.search(pageNo,PAGE_SIZE,reward_name);
+        if (reward_name.equals("")) {
+            return "redirect:/rewards";
+        }
+        Page page = new Page().setList(rewardService.search(reward_name));
         map.put("page",page);
+        map.put("search","search");
         return "backend/all_reward_list";
     }
 
