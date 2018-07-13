@@ -56,8 +56,12 @@ public class UserController {
         if (pageNo<1) {
             pageNo = 1;
         }
-        Page page = userService.seearchByRealName(pageNo,PAGE_SIZE,realName);
+        if (realName.equals("")) {
+            return "redirect:/users";
+        }
+        Page page = new Page().setList(userService.seearchByRealName(realName));
         map.put("page",page);
+        map.put("search","search");
         return "backend/all_user_list";
     }
 

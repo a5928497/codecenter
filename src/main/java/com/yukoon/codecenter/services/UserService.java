@@ -64,9 +64,9 @@ public class UserService {
 
 	//分页按姓名搜索用户信息
 	@Transactional
-	public Page seearchByRealName(Integer pageNo, Integer pageSize,String realName) {
+	public List<User> seearchByRealName(String realName) {
 		realName = "%" + realName + "%";
-		return PageableUtil.page(pageNo,pageSize,userMapper.searchByRealName(realName));
+		return userMapper.searchByRealName(realName);
 	}
 
 	//根据Id查找客户
