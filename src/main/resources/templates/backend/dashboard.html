@@ -35,8 +35,10 @@
             <shiro:hasRole name="admin">
                 <a th:href="@{/users}"><button class="btn btn-primary">全部用户</button></a>
                 <a th:href="@{/rewards}"><button class="btn btn-primary">全部礼品</button></a>
+                <a th:href="@{/getallrecords}"><button class="btn btn-primary">全部记录</button></a>
             </shiro:hasRole>
                 <a th:href="@{/code}"><button class="btn btn-primary">申领兑换码</button></a>
+                 <a th:href="@{/dashboard}"><button class="btn btn-primary">只看自己</button></a>
             <div class="border"></div>
             <div class="row">
                 <div class="col-lg-12">
@@ -60,13 +62,13 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="record:${page.list}">
-                                    <td th:text="${record.id}">ID</td>
-                                    <td th:text="${user.realName}">realName</td>
-                                    <td th:text="${user.bank}">realName</td>
-                                    <td th:text="${record.total}">realName</td>
-                                    <td th:text="${#dates.format(record.apply_date, 'yyyy-MM-dd HH:mm')}">apply_date</td>
+                                    <td th:text="${record.record.id}">ID</td>
+                                    <td th:text="${record.user.realName}">realName</td>
+                                    <td th:text="${record.user.bank}">realName</td>
+                                    <td th:text="${record.record.total}">realName</td>
+                                    <td th:text="${#dates.format(record.record.apply_date, 'yyyy-MM-dd HH:mm')}">apply_date</td>
                                     <td>
-                                        <a th:href="@{/codes/}+${record.id}"><button class="btn btn-sm btn-info">详情</button></a>
+                                        <a th:href="@{/codes/}+${record.record.id}"><button class="btn btn-sm btn-info">详情</button></a>
                                     </td>
 
                                 </tr>
@@ -82,12 +84,12 @@
                             <p>
                                 <span th:text="查找到+${page.recordTotal}+条记录，+共有+${page.pageTotal}+页 "></span>
                                 <span th:text="当前为第+${page.pageNo}+页"></span>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1">上一页</a>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo -2}" th:text="${page.pageNo -2}" th:if="${page.pageNo -2 } ge 1"></a>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo -1}" th:text="${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1"></a>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo +1}" th:text="${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}"></a>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo +2}" th:text="${page.pageNo +2}" th:if="${page.pageNo +2 } le ${page.pageTotal}"></a>
-                                <a th:href="@{/dashboard?pageNo=}+${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}">下一页</a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo -1}:@{/dashboard?pageNo=}+${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1">上一页</a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo -2}:@{/dashboard?pageNo=}+${page.pageNo -2}" th:text="${page.pageNo -2}" th:if="${page.pageNo -2 } ge 1"></a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo -1}:@{/dashboard?pageNo=}+${page.pageNo -1}" th:text="${page.pageNo -1}" th:if="${page.pageNo -1 } ge 1"></a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo +1}:@{/dashboard?pageNo=}+${page.pageNo +1}" th:text="${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}"></a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo +2}:@{/dashboard?pageNo=}+${page.pageNo +2}" th:text="${page.pageNo +2}" th:if="${page.pageNo +2 } le ${page.pageTotal}"></a>
+                                <a th:href="${all !=null}?@{/getallrecords?pageNo=}+${page.pageNo +1}:@{/dashboard?pageNo=}+${page.pageNo +1}" th:if="${page.pageNo +1 } le ${page.pageTotal}">下一页</a>
                             </p>
                         </div>
                     </div>

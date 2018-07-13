@@ -50,7 +50,6 @@ public class LoginController {
 			User user = userService.findByUsername(username);
 			Page page = recordService.findByUserId(pageNo,PAGE_SIZE,user.getId());
 			map.put("page",page);
-			map.put("user",user);
 		}
 		return "backend/dashboard";
 	}

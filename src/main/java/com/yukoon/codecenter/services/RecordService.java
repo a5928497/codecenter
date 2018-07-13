@@ -1,15 +1,15 @@
 package com.yukoon.codecenter.services;
 
-import com.yukoon.codecenter.entities.Code;
-import com.yukoon.codecenter.entities.Page;
-import com.yukoon.codecenter.entities.Record;
+import com.yukoon.codecenter.entities.*;
 import com.yukoon.codecenter.mappers.RecordMapper;
 import com.yukoon.codecenter.utils.CodeUtil;
 import com.yukoon.codecenter.utils.PageableUtil;
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +19,8 @@ public class RecordService {
 	private RecordMapper recordMapper;
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private UserService userService;
 
 	//添加记录并获取新添加记录的id
 	@Transactional
@@ -54,6 +56,24 @@ public class RecordService {
 	//分页查询某个用户下所有申领记录
 	@Transactional
 	public Page findByUserId(Integer pageNo,Integer pageSize,Integer user_id) {
-		return PageableUtil.page(pageNo,pageSize,recordMapper.findByUserid(user_id));
+		List<Records2Show> list = converter(recordMapper.findByUserid(user_id));
+		return PageableUtil.page(pageNo,pageSize,list);
 	}
+
+	//分页查询所有用户的申领记录
+	@Transactional
+	public Page findALL(Integer pageNo,Integer pageSize) {
+		List<Records2Show> list = converter(recordMapper.findAll());
+		return PageableUtil.page(pageNo,pageSize,list);
+	}
+
+	public List<Records2Show> converter(List<Record> records) {
+		List<Records2Show> list = new ArrayList<>();
+		for (Record record :records) {
+			User user = userService.findByid(record.getUser_id());
+			list.add(new Records2Show().setUser(user).setRecord(record));
+		}
+		return list;
+	}
+
 }

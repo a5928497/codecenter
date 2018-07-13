@@ -23,6 +23,9 @@ public interface RecordMapper {
 	@Select("SELECT * FROM records WHERE user_id = #{user_id}")
 	public List<Record> findByUserid(Integer user_id);
 
+	@Select("SELECT * FROM records")
+	public List<Record> findAll();
+
 	@Update("UPDATE records SET flag = null")
 	public void clearFlag();
 }

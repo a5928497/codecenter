@@ -4,6 +4,7 @@ import com.yukoon.codecenter.entities.Record;
 import com.yukoon.codecenter.entities.User;
 import com.yukoon.codecenter.mappers.UserMapper;
 import com.yukoon.codecenter.services.CodeService;
+import com.yukoon.codecenter.services.RecordService;
 import com.yukoon.codecenter.services.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +21,11 @@ public class CodecenterApplicationTests {
 	private RoleService roleService;
 	@Autowired
 	private CodeService codeService;
+	@Autowired
+	private RecordService recordService;
 	@Test
 	public void contextLoads() {
-		Record record = new Record();
-		record.setTotal(10).setReward_id(1);
-		System.out.println(codeService.batchInsert(record));
+		System.out.println(recordService.findALL(1,10).getList());
 	}
 
 }
