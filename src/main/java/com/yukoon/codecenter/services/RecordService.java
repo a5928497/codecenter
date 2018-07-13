@@ -37,9 +37,9 @@ public class RecordService {
 
 	//添加记录、兑换码，并获取新加记录id
 	@Transactional
-	public Integer getCodes(Record record) {
+	public Integer getCodes(Record record,Date date) {
 		Record new_record = insertAndGetRecord(record);
-		List<Code> codes = codeService.batchInsert(new_record);
+		List<Code> codes = codeService.batchInsert(new_record,date);
 		for (Code code:codes) {
 			code.setCode(CodeUtil.encodeCode(code.getId()));
 			codeService.updateCodeAndClearFlag(code);

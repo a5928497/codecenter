@@ -1,5 +1,6 @@
 package com.yukoon.codecenter.controllers;
 
+import com.yukoon.codecenter.entities.Code;
 import com.yukoon.codecenter.entities.Page;
 import com.yukoon.codecenter.entities.Record;
 import com.yukoon.codecenter.entities.Reward;
@@ -10,13 +11,15 @@ import com.yukoon.codecenter.services.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Controller
@@ -30,6 +33,14 @@ public class CodeController {
 	private RecordService recordService;
 	@Autowired
 	private CodeService codeService;
+
+	//日期字符串转换
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 
 	//后台前往兑换券申领页面
 	@GetMapping("/code")
@@ -47,8 +58,8 @@ public class CodeController {
 
 	//后台申领兑换券
 	@PostMapping("/code")
-	public String getCodes(Record record) {
-		Integer record_id = recordService.getCodes(record);
+	public String getCodes(Record record, Date expiration_date) {
+		Integer record_id = recordService.getCodes(record,expiration_date);
 		return "redirect:/codes/" + record_id;
 	}
 

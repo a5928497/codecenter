@@ -11,7 +11,7 @@ public interface CodeMapper {
 
     //批量插入
     @InsertProvider(type = CodeMapperProvider.class,method = "insertAll")
-    public void insertAll(@Param("list")List<Code> users);
+    public void insertAll(@Param("list")List<Code> codes);
 
     //通过flag查找code
     @Select("SELECT * FROM codes WHERE flag = #{flag}")

@@ -21,16 +21,15 @@ public class CodeService {
 
 	//添加兑换码，并获取所有添加的兑换码对象
 	@Transactional
-	public List<Code> batchInsert(Record record) {
+	public List<Code> batchInsert(Record record,Date date) {
 		List<Code> list = new ArrayList<>();
 		List<Code> result = new ArrayList<>();
 		int flag = record.hashCode();
-		System.out.println(flag);
 		for (int i = 0;i<record.getTotal() ;i++) {
 			Code code = new Code();
 			code.setReward_id(record.getReward_id());
 			code.setStatus(1);
-			code.setExpiration_date(new Date());
+			code.setExpiration_date(date);
 			code.setRecord_id(record.getId());
 			code.setFlag(flag);
 			list.add(code);
