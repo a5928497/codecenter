@@ -27,13 +27,13 @@ public class CodeMapperProvider {
     }
 
     public static void main(String[] args) {
-        Code code1 = new Code().setCode("123123").setStatus(1).setReward_id(1).setRecord_id(1).setExpiration_date(new Date());
-        Code code2 = new Code().setCode("sdfdsfd").setStatus(1).setReward_id(1).setRecord_id(1).setExpiration_date(new Date());
-        List<Code> list = new ArrayList<>();
-        list.add(code1);
-        list.add(code2);
-        Map<String,Object> map = new HashMap<>();
-        map.put("list",list);
-        System.out.println(new CodeMapperProvider().insertAll(map));
+//        Code code1 = new Code().setCode("123123").setStatus(1).setReward_id(1).setRecord_id(1).setExpiration_date(new Date());
+//        Code code2 = new Code().setCode("sdfdsfd").setStatus(1).setReward_id(1).setRecord_id(1).setExpiration_date(new Date());
+//        List<Code> list = new ArrayList<>();
+//        list.add(code1);
+//        list.add(code2);
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("list",list);
+//        System.out.println(new CodeMapperProvider().insertAll(map));
     }
 }

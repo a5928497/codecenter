@@ -27,8 +27,11 @@ public class CodeService {
 		System.out.println(flag);
 		for (int i = 0;i<record.getTotal() ;i++) {
 			Code code = new Code();
-			code.setReward_id(record.getReward_id()).setStatus(1).setExpiration_date(new Date())
-					.setRecord_id(record.getId()).setFlag(flag);
+			code.setReward_id(record.getReward_id());
+			code.setStatus(1);
+			code.setExpiration_date(new Date());
+			code.setRecord_id(record.getId());
+			code.setFlag(flag);
 			list.add(code);
 		}
 		codeMapper.insertAll(list);
