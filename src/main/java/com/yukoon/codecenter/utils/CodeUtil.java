@@ -3,6 +3,7 @@ package com.yukoon.codecenter.utils;
 import com.yukoon.codecenter.entities.Code;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -50,8 +51,6 @@ public class CodeUtil {
         }
         char[] code_temp = code.substring(0,size).toCharArray();
         char[] salt_temp = salt.substring(0,size).toCharArray();
-        System.out.println(code_temp);
-        System.out.println(salt_temp);
         StringBuffer sb = new StringBuffer();
         for (int i = 0;i<size  ;i++) {
             sb.append(code_temp[i]-salt_temp[i]);
