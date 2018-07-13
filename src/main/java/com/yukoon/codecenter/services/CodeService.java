@@ -52,8 +52,8 @@ public class CodeService {
 		return PageableUtil.page(pageNo,pageSize,codeMapper.findAllByRecordId(record_id));
 	}
 
-	@Transactional
 	//解码兑换码并返回code对象
+	@Transactional
 	public Code decode(String codeNumber) {
 		Long coid_id = CodeUtil.decodeCode(codeNumber);
 		Code code = codeMapper.findById(coid_id);
@@ -62,5 +62,11 @@ public class CodeService {
 		}else {
 			return null;
 		}
+	}
+
+	//更新code中status字段为2，即已用
+	@Transactional
+	public void cash(Code code) {
+		codeMapper.cash(code);
 	}
 }

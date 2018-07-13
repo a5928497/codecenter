@@ -50,4 +50,29 @@ public class CashController {
         map.put("msg",msg);
         return "backend/cashing_info";
     }
+
+    @PostMapping("/cashcode")
+    public String CashCode(String code, Map<String,Object> map) {
+        Code codeObj = codeService.decode(code);
+        Date date = new Date();
+        String msg;
+        if (null != codeObj && codeObj.getExpiration_date().getTime() >= date.getTime() && codeObj.getStatus()==1) {
+            //若兑换码正确且未失效且未被使用
+            codeService.cash(codeObj);
+            msg = "兑换成功!";
+        }else if (null == codeObj){
+            //若兑换码不正确
+            msg = "兑换码不正确，请确认后重试！";
+        }else if (codeObj.getExpiration_date().getTime() <= date.getTime()) {
+            //若兑换码已失效
+            msg = "兑换码已失效！";
+        }else if (codeObj.getStatus() == 2){
+            //若兑换码已被使用
+            msg = "兑换码已被使用！";
+        }else {
+            msg = "兑换发生了未知的错误，请联系管理员解决！";
+        }
+        map.put("msg",msg);
+        return "backend/cashing_info";
+    }
 }
