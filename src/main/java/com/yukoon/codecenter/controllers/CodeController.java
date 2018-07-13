@@ -62,6 +62,25 @@ public class CodeController {
 		Page page = codeService.findAllByRecordId(pageNo,PAGE_SIZE,record_id);
 		Record record = recordService.findById(record_id);
 		Reward reward = rewardService.findById(record.getReward_id());
+		map.put("record_id",record_id);
+		map.put("page",page);
+		map.put("reward",reward);
+		map.put("reward_id",record.getReward_id());
+		return "backend/code_list";
+	}
+
+	//后台查询某记录下的所有兑换券
+	@GetMapping("/codes")
+	public String findAllByRecordIdWithRequestParam(@RequestParam(value = "pageNo",required = false,defaultValue = "1")Integer pageNo,
+													@RequestParam(value = "record_id",required = true)Integer record_id,
+													Map<String,Object> map) {
+		if (pageNo <1) {
+			pageNo = 1;
+		}
+		Page page = codeService.findAllByRecordId(pageNo,PAGE_SIZE,record_id);
+		Record record = recordService.findById(record_id);
+		Reward reward = rewardService.findById(record.getReward_id());
+		map.put("record_id",record_id);
 		map.put("page",page);
 		map.put("reward",reward);
 		map.put("reward_id",record.getReward_id());
