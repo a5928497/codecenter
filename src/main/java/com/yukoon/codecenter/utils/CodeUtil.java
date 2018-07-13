@@ -39,7 +39,28 @@ public class CodeUtil {
         return String.valueOf(temp);
     }
 
+    public static Long decodeCode(String code) {
+        char[] temp1 = code.substring(14).toCharArray();
+        char[] temp2 = salt.substring(14).toCharArray();
+        int size = 0;
+        if (temp1[0]-temp2[0]!=1) {
+            size = temp1[1]-temp2[1];
+        }else {
+            size = temp1[1]-temp2[1] +10;
+        }
+        char[] code_temp = code.substring(0,size).toCharArray();
+        char[] salt_temp = salt.substring(0,size).toCharArray();
+        System.out.println(code_temp);
+        System.out.println(salt_temp);
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0;i<size  ;i++) {
+            sb.append(code_temp[i]-salt_temp[i]);
+        }
+        return Long.valueOf(sb.toString());
+    }
+
     public static void main(String[] args) {
-        System.out.println(encodeCode(99999999999999L));
+        System.out.println(encodeCode(54875105876L));
+        System.out.println(decodeCode("fgXHlIpjMPlMGd9D"));
     }
 }
