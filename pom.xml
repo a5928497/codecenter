@@ -347,6 +347,17 @@
 		<developerConnection>scm:git:https://github.com/a5928497/codecenter.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-
+	<distributionManagement>
+		<repository>
+			<id>releases</id>
+			<name>Releases Repository</name>
+			<url>http://www.lizili.cn:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Snapshots Repository</name>
+			<url>http://www.lizili.cn:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 </project>

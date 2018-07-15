@@ -14,7 +14,7 @@ public class EncodeUtil {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("abcd".length());
+		System.out.println(encodePassword("fscmb","admin"));
 
 	}
 }
