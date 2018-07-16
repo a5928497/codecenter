@@ -271,7 +271,7 @@
 					<providerImplementations>
 						<git>jgit</git>
 					</providerImplementations>
-					<username>a5928497</username>
+					<username>${scm.git.username}</username>
 					<password>${scm.git.password}</password>
 					<releaseProfiles>releases</releaseProfiles>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
