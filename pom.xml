@@ -4,7 +4,7 @@
 
 	<groupId>com.yukoon</groupId>
 	<artifactId>codecenter</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.51-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>codecenter</name>
@@ -26,7 +26,7 @@
 		<!-- thymeleaf2   layout1-->
 		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
 		<docker.repostory>registry.cn-shenzhen.aliyuncs.com</docker.repostory>
-		<docker.space>fscmb</docker.space>
+		<docker.space>lizili_test</docker.space>
 		<docker.image>codecenter</docker.image>
 	</properties>
 
