@@ -4,7 +4,7 @@
 
 	<groupId>com.yukoon</groupId>
 	<artifactId>codecenter</artifactId>
-	<version>0.0.53</version>
+	<version>0.0.54-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>codecenter</name>
@@ -352,7 +352,7 @@
 		<url>https://github.com/a5928497/codecenter.git</url>
 		<connection>scm:git:https://github.com/a5928497/codecenter.git</connection>
 		<developerConnection>scm:git:https://github.com/a5928497/codecenter.git</developerConnection>
-		<tag>0.0.53</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<distributionManagement>
 		<repository>
