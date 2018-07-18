@@ -19,11 +19,13 @@ public class CashController {
     @Autowired
     private RewardService rewardService;
 
+    //前往兑换页面
     @GetMapping("/tocash")
     public String toCash() {
         return "backend/cashing_input";
     }
 
+    //验证兑换码
     @PostMapping("/vaildatecode")
     public String vaildateCode(String code, Map<String,Object> map) {
         Code codeObj = codeService.decode(code);
@@ -51,6 +53,7 @@ public class CashController {
         return "backend/cashing_info";
     }
 
+    //使用兑换码
     @PostMapping("/cashcode")
     public String CashCode(String code, Map<String,Object> map) {
         Code codeObj = codeService.decode(code);

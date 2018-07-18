@@ -18,7 +18,7 @@ public interface CodeMapper {
     public List<Code> findByFlag(int flag);
 
     //通过record_id查找code
-    @Select("SELECT code,status,reward_id,record_id,expiration_date FROM codes WHERE record_id = #{record_id}")
+    @Select("SELECT code,status,reward_id,record_id,expiration_date,operator_id,cashing_date FROM codes WHERE record_id = #{record_id}")
     public List<Code> findAllByRecordId(Integer record_id);
 
     @Select("SELECT * FROM codes WHERE id =#{id}")

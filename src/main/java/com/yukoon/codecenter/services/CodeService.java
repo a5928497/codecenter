@@ -1,9 +1,8 @@
 package com.yukoon.codecenter.services;
 
-import com.yukoon.codecenter.entities.Code;
-import com.yukoon.codecenter.entities.Page;
-import com.yukoon.codecenter.entities.Record;
+import com.yukoon.codecenter.entities.*;
 import com.yukoon.codecenter.mappers.CodeMapper;
+import com.yukoon.codecenter.mappers.UserMapper;
 import com.yukoon.codecenter.utils.CodeUtil;
 import com.yukoon.codecenter.utils.PageableUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import java.util.List;
 public class CodeService {
 	@Autowired
 	private CodeMapper codeMapper;
+	@Autowired
+	private UserMapper userMapper;
 
 	//添加兑换码，并获取所有添加的兑换码对象
 	@Transactional
@@ -48,7 +49,17 @@ public class CodeService {
 	//通过record_id查找所有兑换码，返回分页对象
 	@Transactional
 	public Page findAllByRecordId(Integer pageNo,Integer pageSize,Integer record_id) {
-		return PageableUtil.page(pageNo,pageSize,codeMapper.findAllByRecordId(record_id));
+		List<Code2Show> list = new ArrayList<>();
+		List<Code> codes = codeMapper.findAllByRecordId(record_id);
+		for (Code code:codes) {
+			Code2Show code2Show = new Code2Show();
+			code2Show.setCode(code);
+			if (null != code.getOperator_id()) {
+				code2Show.setOperator(userMapper.findById(code.getOperator_id()));
+			}
+			list.add(code2Show);
+		}
+		return PageableUtil.page(pageNo,pageSize,list);
 	}
 
 	//解码兑换码并返回code对象

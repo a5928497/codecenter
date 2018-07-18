@@ -55,15 +55,19 @@
                                     <th data-hide="all">对应礼品</th>
                                     <th data-hide="all">状态</th>
                                     <th data-hide="all">失效时间</th>
+                                    <th data-hide="all">兑换人</th>
+                                    <th data-hide="all">兑换时间</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr th:each="code:${page.list}">
-                                        <td th:text="${code.code}">code</td>
+                                        <td th:text="${code.code.code}">code</td>
                                         <td th:text="${reward.reward_name}">reward_name</td>
-                                        <td th:text="可用" th:if="${code.status}==1">status</td>
-                                        <td th:text="已用" th:if="${code.status}==2">status</td>
-                                        <td th:text="${#dates.format(code.expiration_date, 'yyyy-MM-dd HH:mm')}"></td>
+                                        <td th:text="可用" th:if="${code.code.status}==1">status</td>
+                                        <td th:text="已用" th:if="${code.code.status}==2">status</td>
+                                        <td th:text="${#dates.format(code.code.expiration_date, 'yyyy-MM-dd HH:mm')}"></td>
+                                        <td th:text="${code.operator!=null}?${code.operator.realName}+@{-}+${code.operator.bank}:未使用"></td>
+                                        <td th:text="${code.code.cashing_date !=null}?${#dates.format(code.code.cashing_date, 'yyyy-MM-dd HH:mm')}:未使用"></td>
                                     </tr>
                                 </tbody>
                                 <tfoot>

@@ -18,6 +18,8 @@ public class Code {
     private Integer record_id;
     private Date expiration_date;
     private int flag;
+    private Integer operator_id;
+    private Date cashing_date;
 
     public Long getId() {
         return id;
@@ -73,5 +75,21 @@ public class Code {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+    public Integer getOperator_id() {
+        return operator_id;
+    }
+
+    public void setOperator_id(Integer operator_id) {
+        this.operator_id = operator_id;
+    }
+
+    public Date getCashing_date() {
+        return cashing_date;
+    }
+
+    public void setCashing_date(Date cashing_date) {
+        this.cashing_date = cashing_date;
     }
 }
