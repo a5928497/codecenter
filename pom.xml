@@ -358,13 +358,12 @@
 		<repository>
 			<id>releases</id>
 			<name>Releases Repository</name>
-			<url>http://c2012q6149.51mypc.cn:8181/repository/maven-releases/</url>
+			<url>http://192.168.1.10:8181/repository/maven-releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Snapshots Repository</name>
-            <!--http://192.168.1.10:8181/repository/maven-snapshots/-->
-			<url>http://c2012q6149.51mypc.cn:8181/repository/maven-snapshots/</url>
+			<url>http://192.168.1.10:8181/repository/maven-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
