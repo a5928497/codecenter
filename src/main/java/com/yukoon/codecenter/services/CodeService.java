@@ -74,7 +74,7 @@ public class CodeService {
 		}
 	}
 
-	//更新code中status字段为2，即已用
+	//更新code中关于兑换的字段
 	@Transactional
 	public void cash(Code code) {
 		codeMapper.cash(code);

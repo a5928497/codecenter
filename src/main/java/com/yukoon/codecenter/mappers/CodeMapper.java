@@ -28,7 +28,7 @@ public interface CodeMapper {
     @Update("UPDATE codes SET flag =null,code = #{code} WHERE id = #{id}")
     public void updateCodeAndClearFlag(Code code);
 
-    //将code状态更新为2，即已用
-    @Update("UPDATE codes SET status = 2 WHERE id = #{id}")
+    //将code状态、兑换人员、兑换时间更新，即已用
+    @Update("UPDATE codes SET status = 2 ,cashing_date = #{cashing_date},operator_id = #{operator_id} WHERE id = #{id}")
     public void cash(Code code);
 }
