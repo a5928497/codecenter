@@ -4,7 +4,7 @@ spring:
     driver-class-name: org.gjt.mm.mysql.Driver
     url: jdbc:mysql://db:3306/codecenter
     username: root
-    password: 123456
+    password: root
     dbcp2:
           #最小连接数
           min-idle: 5
