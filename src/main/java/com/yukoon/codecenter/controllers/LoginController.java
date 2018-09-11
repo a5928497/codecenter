@@ -77,4 +77,9 @@ public class LoginController {
 			return "redirect:/login";
 		}
 	}
+
+	@GetMapping("/test")
+	public String test() {
+		return "commons/test.html";
+	}
 }
