@@ -3,10 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        input[node-type=jsbridge]{
+            display:none;
+        }
+    </style>
 </head>
 <body>
+    <div>
+        <div class="qr-btn" node-type="qr-btn">扫描二维码1
+            <input node-type="jsbridge" type="file" name="myPhoto" value="扫描二维码1" />
+        </div>
+    </div>
+    <div>
+    <div class="qr-btn" node-type="qr-btn">扫描二维码2
+        <input node-type="jsbridge" type="file" name="myPhoto" value="扫描二维码2" />
+    </div>
+</div>
+    <div class="result-qrcode">
+    </div>
     <script type="text/javascript" th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/qrcode/qrcode.lib.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/qrcode/qrcode.js}"></script>
+    <script>
+        //初始化扫描二维码按钮，传入自定义的 node-type 属性
+        $(function() {
+            Qrcode.init($('[node-type=qr-btn]'));
+        });
+    </script>
 </body>
 </html>
