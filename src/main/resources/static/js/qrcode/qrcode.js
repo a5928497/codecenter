@@ -34,7 +34,8 @@
         weiBoBridge: function() {
             window.WeiboJSBridge.invoke('scanQRCode', null, function(params) {
                 //得到扫码的结果
-                $('.result-qrcode').append(params.result + '<br/>');
+                // $('.result-qrcode').append(params.result + '<br/>');
+                $('#code').val(params.result);
             });
         },
         getImgFile: function() {
@@ -59,7 +60,8 @@
                 qrcode.decode(oFREvent.target.result);
                 qrcode.callback = function(data) {
                     //得到扫码的结果
-                    $('.result-qrcode').append(data + '<br/>');
+                    // $('.result-qrcode').append(data + '<br/>');
+                    $('#code').val(data);
                 };
             };
 
